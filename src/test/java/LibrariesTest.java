@@ -11,6 +11,7 @@ public class LibrariesTest {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.get("http://www.kurs-selenium.pl/demo/m-hotels");
+        //test
     }
 
 }
