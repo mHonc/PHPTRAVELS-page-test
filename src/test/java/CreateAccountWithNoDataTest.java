@@ -1,26 +1,15 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
+public class CreateAccountWithNoDataTest extends BaseTest {
 
-public class CreateAccountWithNoData {
     @Test
-    public void signUp() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("http://www.kurs-selenium.pl/demo/m-hotels");
-
+    public void signUpTest() throws InterruptedException {
         driver.findElements(By.id("li_myaccount")).stream().
                 filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
 
@@ -44,7 +33,6 @@ public class CreateAccountWithNoData {
         Assert.assertTrue(errors.contains(error2));
         Assert.assertTrue(errors.contains(error3));
         Assert.assertTrue(errors.contains(error4));
-        driver.quit();
     }
 
 }
