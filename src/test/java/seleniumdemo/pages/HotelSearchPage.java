@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.util.List;
+
 
 public class HotelSearchPage {
 
@@ -16,9 +16,6 @@ public class HotelSearchPage {
 
     @FindBy(xpath = "//*[@id=\"select2-drop\"]/div/input")
     private WebElement searchHotelInput;
-
-    @FindBy(xpath = "//span[@class='select2-match' and text()='Dubai']")
-    private WebElement hotelMatch;
 
     @FindBy(xpath = "//input[@class='form input-lg dpd1']")
     private WebElement checkInInput;
@@ -38,14 +35,24 @@ public class HotelSearchPage {
     @FindBy(xpath = "//button[@class='btn btn-lg btn-block btn-primary pfb0 loader']")
     private WebElement searchButton;
 
+    @FindBy(id = "li_myaccount")
+    private List<WebElement> accountLink;
+
+    @FindBy(xpath = "//a[text() = '  Sign Up']")
+    private List<WebElement> signUpPageButton;
+
+    private WebDriver driver;
+
     public HotelSearchPage(WebDriver driver){
         PageFactory.initElements(driver, this);
+        this.driver = driver;
     }
 
     public void setCity(String city){
         searchHotelSpan.click();
         searchHotelInput.sendKeys(city);
-        hotelMatch.click();
+        String hotelMatch = "//span[@class='select2-match' and text()='" + city + "']";
+        driver.findElement(By.xpath(hotelMatch)).click();
     }
 
     public void setDate(String checkIn, String checkOut){
@@ -53,13 +60,20 @@ public class HotelSearchPage {
         checkOutInput.sendKeys(checkOut);
     }
 
-    public void setTravelersCount(){
+    public void setTravelersCount(int adults, int childs){
         travellersInput.click();
-        adultInput.sendKeys("4");
-        childInput.sendKeys("2");
+        adultInput.clear();
+        childInput.clear();
+        adultInput.sendKeys(String.valueOf(adults));
+        childInput.sendKeys(String.valueOf(childs));
     }
 
     public void performSearch(){
         searchButton.click();
+    }
+
+    public void openSignUpPage(){
+        accountLink.stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
+        signUpPageButton.get(1).click();
     }
 }
