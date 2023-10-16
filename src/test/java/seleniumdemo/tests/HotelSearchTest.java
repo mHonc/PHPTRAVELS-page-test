@@ -15,14 +15,12 @@ public class HotelSearchTest extends BaseTest{
     @Test
     public void searchHotelTest(){
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.setCity("Dubai");
-        hotelSearchPage.setDate("05/12/2023", "12/12/2023");
-        hotelSearchPage.setTravelersCount(4, 2);
-        hotelSearchPage.performSearch();
+        List<String> hotels = hotelSearchPage.setCity("Dubai")
+                .setDate("05/12/2023", "12/12/2023")
+                .setTravelersCount(4, 2)
+                .performSearch()
+                .getHotelList();
 
-        ResultsPage resultsPage = new ResultsPage(driver);
-
-        List<String> hotels = resultsPage.getHotelList();
         hotels.forEach(el -> System.out.println(el));
         Assert.assertEquals(hotels.size(), 4);
 
