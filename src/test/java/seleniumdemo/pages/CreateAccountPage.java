@@ -1,10 +1,12 @@
 package seleniumdemo.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateAccountPage {
 
@@ -29,6 +31,9 @@ public class CreateAccountPage {
 
     @FindBy(xpath = "//button[@class='signupbtn btn_full btn btn-action btn-block btn-lg']")
     private WebElement signUpButton;
+
+    @FindBy(xpath = "//div[@class='alert alert-danger']//p")
+    private List<WebElement> errors;
 
     public CreateAccountPage(WebDriver driver){
         PageFactory.initElements(driver, this);
@@ -61,6 +66,14 @@ public class CreateAccountPage {
 
     public void signUp() {
         signUpButton.click();
+    }
+
+    public List<String> getErrors(){
+        List<String> errors = new ArrayList<>();
+        for(WebElement el : this.errors){
+            errors.add(el.getText());
+        }
+        return errors;
     }
 
 }
