@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import seleniumdemo.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,25 @@ public class CreateAccountPage {
             errors.add(el.getText());
         }
         return errors;
+    }
+
+    public void fillSignUpForm(String firstName, String lastName, String email,
+                               String phone, String password){
+        this.firstName.sendKeys(firstName);
+        this.lastName.sendKeys(lastName);
+        this.email.sendKeys(email);
+        this.phone.sendKeys(phone);
+        this.password.sendKeys(password);
+        this.confirmpassword.sendKeys(password);
+    }
+
+    public void fillSignUpForm(User user){
+        this.firstName.sendKeys(user.getFirstName());
+        this.lastName.sendKeys(user.getLastName());
+        this.email.sendKeys(user.getEmail());
+        this.phone.sendKeys(user.getPhone());
+        this.password.sendKeys(user.getPassword());
+        this.confirmpassword.sendKeys(user.getPassword());
     }
 
 }

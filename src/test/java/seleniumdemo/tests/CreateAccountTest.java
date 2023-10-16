@@ -2,6 +2,7 @@ package seleniumdemo.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import seleniumdemo.model.User;
 import seleniumdemo.pages.CreateAccountPage;
 import seleniumdemo.pages.HotelSearchPage;
 import seleniumdemo.pages.LoggedUserPage;
@@ -26,12 +27,9 @@ public class CreateAccountTest extends BaseTest{
         String lastName = "Max";
 
         CreateAccountPage createAccountPage = new CreateAccountPage(driver);
-        createAccountPage.setFirstName(firstName);
-        createAccountPage.setLastName(lastName);
-        createAccountPage.setPhone("999999999");
-        createAccountPage.setEmail(String.valueOf(randomNineDigitNumber)+"@gmail.com");
-        createAccountPage.setPassword("Kamil123");
-        createAccountPage.setConfirmpassword("Kamil123");
+        User user = new User(firstName, lastName,
+                String.valueOf(randomNineDigitNumber)+"@gmail.com","999999999" , "Kamil123");
+        createAccountPage.fillSignUpForm(user);
         createAccountPage.signUp();
 
         Thread.sleep(10000);
