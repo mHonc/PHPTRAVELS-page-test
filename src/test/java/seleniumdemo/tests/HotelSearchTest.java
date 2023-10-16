@@ -24,6 +24,8 @@ public class HotelSearchTest extends BaseTest{
         hotels.forEach(el -> System.out.println(el));
         Assert.assertEquals(hotels.size(), 4);
 
+        //test
+        System.out.println("test");
         List<WebElement> elementsCities = driver.findElements(By.xpath("//a[@class='go-right ellipsisFIX go-text-right mob-fs14']"));
         for(WebElement el : elementsCities){
             Assert.assertEquals(el.getText(), "dubai");
