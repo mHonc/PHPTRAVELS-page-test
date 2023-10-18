@@ -36,7 +36,7 @@ public class CreateAccountPage {
     @FindBy(xpath = "//div[@class='alert alert-danger']//p")
     private List<WebElement> errors;
 
-    public CreateAccountPage(WebDriver driver){
+    public CreateAccountPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
@@ -65,35 +65,37 @@ public class CreateAccountPage {
         this.confirmpassword.sendKeys(password);
     }
 
-    public void signUp() {
+    public LoggedUserPage signUp() {
         signUpButton.click();
+        return new LoggedUserPage(driver);
     }
 
-    public List<String> getErrors(){
+    public List<String> getErrors() {
         List<String> errors = new ArrayList<>();
-        for(WebElement el : this.errors){
+        for (WebElement el : this.errors) {
             errors.add(el.getText());
         }
         return errors;
     }
 
-    public void fillSignUpForm(String firstName, String lastName, String email,
-                               String phone, String password){
+    public CreateAccountPage fillSignUpForm(String firstName, String lastName, String email,
+                                            String phone, String password) {
         this.firstName.sendKeys(firstName);
         this.lastName.sendKeys(lastName);
         this.email.sendKeys(email);
         this.phone.sendKeys(phone);
         this.password.sendKeys(password);
         this.confirmpassword.sendKeys(password);
+        return this;
     }
 
-    public void fillSignUpForm(User user){
+    public CreateAccountPage fillSignUpForm(User user) {
         this.firstName.sendKeys(user.getFirstName());
         this.lastName.sendKeys(user.getLastName());
         this.email.sendKeys(user.getEmail());
         this.phone.sendKeys(user.getPhone());
         this.password.sendKeys(user.getPassword());
         this.confirmpassword.sendKeys(user.getPassword());
+        return this;
     }
-
 }

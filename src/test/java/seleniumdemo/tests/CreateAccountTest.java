@@ -11,13 +11,10 @@ import java.util.List;
 import java.util.Random;
 
 
-public class CreateAccountTest extends BaseTest{
+public class CreateAccountTest extends BaseTest {
 
     @Test
     public void signUpTest() throws InterruptedException {
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpPage();
-
         //dla unikanego adresu email
         int min = 100_000_000;
         int max = 999_999_999;
@@ -25,24 +22,23 @@ public class CreateAccountTest extends BaseTest{
         int randomNineDigitNumber = random.nextInt(max - min + 1) + min;
         String firstName = "Kamil";
         String lastName = "Max";
-
-        CreateAccountPage createAccountPage = new CreateAccountPage(driver);
         User user = new User(firstName, lastName,
-                String.valueOf(randomNineDigitNumber)+"@gmail.com","999999999" , "Kamil123");
-        createAccountPage.fillSignUpForm(user);
-        createAccountPage.signUp();
+                String.valueOf(randomNineDigitNumber) + "@gmail.com", "999999999", "Kamil123");
+
+        LoggedUserPage loggedUserPage = new HotelSearchPage(driver)
+                .openSignUpPage()
+                .fillSignUpForm(user)
+                .signUp();
 
         Thread.sleep(10000);
-        LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
         String result = loggedUserPage.getWelcomeHeader();
         Assert.assertEquals("Hi, " + firstName + " " + lastName, result);
     }
 
     @Test
     public void signUpWithNoDataTest() {
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpPage();
-        CreateAccountPage createAccountPage = new CreateAccountPage(driver);
+        CreateAccountPage createAccountPage = new HotelSearchPage(driver)
+                .openSignUpPage();
         createAccountPage.signUp();
 
         String error1 = "The Email field is required.";
