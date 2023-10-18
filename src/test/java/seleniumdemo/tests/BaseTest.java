@@ -14,7 +14,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setup() {
-        driver = DriverFactory.getDriver("firefox");
+        driver = DriverFactory.getDriver("");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://www.kurs-selenium.pl/demo/m-hotels");
