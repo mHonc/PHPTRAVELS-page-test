@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class CreateAccountTest extends BaseTest{
+public class CreateAccountTest extends BaseTest {
 
     @Test
     public void signUpTest() throws InterruptedException {
@@ -28,7 +28,7 @@ public class CreateAccountTest extends BaseTest{
 
         CreateAccountPage createAccountPage = new CreateAccountPage(driver);
         User user = new User(firstName, lastName,
-                String.valueOf(randomNineDigitNumber)+"@gmail.com","999999999" , "Kamil123");
+                String.valueOf(randomNineDigitNumber) + "@gmail.com", "999999999", "Kamil123");
         createAccountPage.fillSignUpForm(user);
         createAccountPage.signUp();
 

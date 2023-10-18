@@ -36,7 +36,7 @@ public class CreateAccountPage {
     @FindBy(xpath = "//div[@class='alert alert-danger']//p")
     private List<WebElement> errors;
 
-    public CreateAccountPage(WebDriver driver){
+    public CreateAccountPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
@@ -69,16 +69,16 @@ public class CreateAccountPage {
         signUpButton.click();
     }
 
-    public List<String> getErrors(){
+    public List<String> getErrors() {
         List<String> errors = new ArrayList<>();
-        for(WebElement el : this.errors){
+        for (WebElement el : this.errors) {
             errors.add(el.getText());
         }
         return errors;
     }
 
     public void fillSignUpForm(String firstName, String lastName, String email,
-                               String phone, String password){
+                               String phone, String password) {
         this.firstName.sendKeys(firstName);
         this.lastName.sendKeys(lastName);
         this.email.sendKeys(email);
@@ -87,7 +87,7 @@ public class CreateAccountPage {
         this.confirmpassword.sendKeys(password);
     }
 
-    public void fillSignUpForm(User user){
+    public void fillSignUpForm(User user) {
         this.firstName.sendKeys(user.getFirstName());
         this.lastName.sendKeys(user.getLastName());
         this.email.sendKeys(user.getEmail());

@@ -10,10 +10,10 @@ import seleniumdemo.pages.ResultsPage;
 import java.util.List;
 
 
-public class HotelSearchTest extends BaseTest{
+public class HotelSearchTest extends BaseTest {
 
     @Test
-    public void searchHotelTest(){
+    public void searchHotelTest() {
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.setCity("Dubai");
         hotelSearchPage.setDate("05/12/2023", "12/12/2023");
@@ -27,13 +27,13 @@ public class HotelSearchTest extends BaseTest{
         Assert.assertEquals(hotels.size(), 4);
 
         List<WebElement> elementsCities = driver.findElements(By.xpath("//a[@class='go-right ellipsisFIX go-text-right mob-fs14']"));
-        for(WebElement el : elementsCities){
+        for (WebElement el : elementsCities) {
             Assert.assertEquals(el.getText(), "dubai");
         }
     }
 
     @Test
-    public void searchHotelTestWithNoCity(){
+    public void searchHotelTestWithNoCity() {
         //first method
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.setDate("05/12/2023", "12/12/2023");
