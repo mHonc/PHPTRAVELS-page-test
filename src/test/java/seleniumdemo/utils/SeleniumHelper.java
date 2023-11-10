@@ -9,7 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 public class SeleniumHelper {
 
@@ -31,10 +33,14 @@ public class SeleniumHelper {
     }
 
     private static String takeScreenshot(WebDriver driver) throws IOException {
-        int randomNumber = (int) (Math.random()*1000);
+        // nazwa pliku jaka aktualna data + godzina
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String formattedDate = dateFormat.format(currentDate);
+
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File file = screenshot.getScreenshotAs(OutputType.FILE);
-        String path = "src/test/resources/screenshots/screenshot" + randomNumber + ".png";
+        String path = "src/test/resources/screenshots/screenshot_" + formattedDate + ".png";;
         FileUtils.copyFile(file, new File(path));
         return path;
     }

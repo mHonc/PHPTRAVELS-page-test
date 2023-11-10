@@ -76,9 +76,14 @@ public class HotelSearchTest extends BaseTest {
         test.log(Status.INFO, "Hotel list", SeleniumHelper.getScreenshot(driver));
         List<WebElement> elementsCities = driver.findElements(By.xpath("//a[@class='go-right ellipsisFIX go-text-right mob-fs14']"));
         for (WebElement el : elementsCities) {
-            Assert.assertEquals(el.getText(), city.toLowerCase());
+            try {
+                Assert.assertEquals(el.getText(), city.toLowerCase());
+            } catch (AssertionError e) {
+                test.log(Status.FAIL, "Assertion failed: " + e.getMessage(), SeleniumHelper.getScreenshot(driver));
+                throw new RuntimeException("Program failed due to an exception.", e);
+            }
         }
-        test.log(Status.PASS, "Assertions passed");
+        test.log(Status.PASS, "Assertions passed", SeleniumHelper.getScreenshot(driver));
     }
 
     @DataProvider
