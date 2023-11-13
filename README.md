@@ -14,6 +14,7 @@
 - The tests include common scenarios such as navigating to a website, interacting with web elements, and performing assertions.
 - Page Object Pattern
 - Project includes generation of a simple report through the use of ExtentReports.
+- Fluent Approach on fluent-approach branch 
 
 
 ## Technologies Used
